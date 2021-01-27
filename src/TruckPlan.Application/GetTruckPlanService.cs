@@ -1,16 +1,34 @@
 ﻿using System;
 using System.Threading.Tasks;
+using TruckPlan.Domain;
 
 namespace TruckPlan.Application
 {
     public class GetTruckPlanService
     {
-        public Task<TruckPlanDTO> Handle(string planName)
+        private readonly ITruckPlanRepository _truckPlanRepository;
+
+        public GetTruckPlanService(ITruckPlanRepository truckPlanRepository)
         {
-            throw new NotImplementedException();
+            _truckPlanRepository = truckPlanRepository;
+        }
+
+        //TODO: with cancellation token
+        public async Task<TruckPlanDTO> Handle(string planName)
+        {
+            var plan = await _truckPlanRepository.GetByName(planName);
+
+            if (plan == null) return null;
+            
+            return new TruckPlanDTO
+            {
+                Id = plan.Id,
+                Name = plan.Name,
+                Distance = await plan.TotalInstance(),
+            };
         }
     }
-
+    
     public class TruckPlanDTO
     {
         public Guid Id { get; set; }
