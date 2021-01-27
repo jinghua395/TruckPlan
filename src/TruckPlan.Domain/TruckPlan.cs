@@ -33,6 +33,8 @@ namespace TruckPlan.Domain
         private readonly List<Location> _locations;
         public IReadOnlyCollection<Location> Locations => _locations;
 
+        //Not sure why we need to calculate the distance as described
+        //TODO: I would just save the distance in repo
         public async Task<decimal> TotalInstance()
         {
             //High CPU task

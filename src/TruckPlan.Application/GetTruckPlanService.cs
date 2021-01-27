@@ -24,7 +24,7 @@ namespace TruckPlan.Application
             {
                 Id = plan.Id,
                 Name = plan.Name,
-                Distance = await plan.TotalInstance(),
+                Distance = Math.Round(await plan.TotalInstance(), 2),
             };
         }
     }
