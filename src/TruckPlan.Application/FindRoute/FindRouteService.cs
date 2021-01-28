@@ -17,6 +17,9 @@ namespace TruckPlan.Application.FindRoute
         {
             var route = await _routeApiService.GetRoute(longitude, latitude);
 
+            //Maybe error handling?
+            if (route == null) return null; 
+
             return new RouteDTO
             {
                 Locations = route.Select(r => new LocationDTO
