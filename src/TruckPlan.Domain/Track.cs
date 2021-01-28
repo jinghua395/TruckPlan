@@ -12,6 +12,7 @@ namespace TruckPlan.Domain
             Id = Guid.NewGuid();
             TruckPlanId = truckPlanId;
             DriverId = driverId;
+            Date = date;
 
             _locations = new List<Location>();
         }
@@ -19,10 +20,10 @@ namespace TruckPlan.Domain
         public Guid Id { get; private set; }
         public Guid TruckPlanId { get; set; }
         public Guid DriverId { get; private set; }
-
+        //Consider store driver age
         public DateTime Date { get; private set; }
 
-        //can be a location + timestamp
+        //Consider model it as location + timestamp
         private readonly List<Location> _locations;
         public IReadOnlyCollection<Location> Locations => _locations;
 

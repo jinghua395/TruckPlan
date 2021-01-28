@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TruckPlan.Domain
+﻿namespace TruckPlan.Domain
 {
     //Value object
     public class Location
