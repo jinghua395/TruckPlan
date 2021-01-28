@@ -10,7 +10,7 @@ namespace TruckPlan.Domain.Test
     {
 
         [TestMethod]
-        public async Task TotalDistance_GivenTestData_ThenOk()
+        public void TotalDistance_GivenTestData_ThenOk()
         {
             var sut = new TruckPlan("a", new List<Location>
             {
@@ -18,7 +18,7 @@ namespace TruckPlan.Domain.Test
                 new Location(3, 4),
             });
 
-            var result = await sut.TotalInstance();
+            var result = sut.Distance;
 
             Assert.AreEqual(5.00m, Math.Round(result, 2));
         }
