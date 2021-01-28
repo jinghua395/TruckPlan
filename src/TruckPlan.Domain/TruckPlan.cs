@@ -43,20 +43,11 @@ namespace TruckPlan.Domain
         //https://docs.microsoft.com/en-us/dotnet/standard/async-in-depth
         private decimal TotalInstance(List<Location> locations) 
         {
-            decimal DistanceInBetween(Location l1, Location l2)
-            {
-                return (decimal) Math.Sqrt(
-                    Math.Pow((double) l2.Latitude - (double) l1.Latitude, 2)
-                    +
-                    Math.Pow((double) l2.Longitude - (double) l1.Longitude, 2)
-                );
-            }
-
             var distance = 0m;
             for (var i = 1; i < locations.Count; i++)
             {
                 //algorithm to calculate
-                distance += DistanceInBetween(locations[i - 1], locations[i]);
+                distance += CalculateDistanceService.DistanceInBetween(locations[i - 1], locations[i]);
             }
 
             return distance;

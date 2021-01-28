@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TruckPlan.Domain
 {
     //Aggregate root
     public class Track
     {
-        public Track(Guid id, Guid truckPlanId, Guid driverId)
+        public Track(Guid truckPlanId, Guid driverId)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             TruckPlanId = truckPlanId;
             DriverId = driverId;
 
@@ -22,8 +23,15 @@ namespace TruckPlan.Domain
         private readonly List<Location> _locations;
         public IReadOnlyCollection<Location> Locations => _locations;
 
+        public decimal Distance { get; set; }
+
         public void AddLocation(Location location)
         {
+            if (_locations.Any())
+            {
+                Distance += CalculateDistanceService.DistanceInBetween(_locations.Last(), location);
+            }
+
             _locations.Add(location);
         }
     }
