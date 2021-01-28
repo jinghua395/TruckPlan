@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TruckPlan.Application
 {
-    public class QueryDriverService
+    public class QueryDriverTrackService
     {
         public Task<QueryResult> Handle(int ageFrom, int ageTo, DateTime dateFrom, DateTime dateTo)
         {

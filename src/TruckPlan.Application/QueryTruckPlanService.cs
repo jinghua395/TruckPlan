@@ -4,11 +4,11 @@ using TruckPlan.Domain;
 
 namespace TruckPlan.Application
 {
-    public class GetTruckPlanService
+    public class QueryTruckPlanService
     {
         private readonly ITruckPlanRepository _truckPlanRepository;
 
-        public GetTruckPlanService(ITruckPlanRepository truckPlanRepository)
+        public QueryTruckPlanService(ITruckPlanRepository truckPlanRepository)
         {
             _truckPlanRepository = truckPlanRepository;
         }
