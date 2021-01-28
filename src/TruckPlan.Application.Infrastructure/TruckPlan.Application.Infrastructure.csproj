@@ -9,8 +9,4 @@
     <ProjectReference Include="..\TruckPlan.Domain\TruckPlan.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Web\" />
-  </ItemGroup>
-
 </Project>

@@ -14,7 +14,7 @@ namespace TruckPlan.Domain
             DriverId = driverId;
             Date = date;
 
-            _locations = new List<Location>();
+            _positions = new List<Position>();
         }
 
         public Guid Id { get; private set; }
@@ -24,19 +24,40 @@ namespace TruckPlan.Domain
         public DateTime Date { get; private set; }
 
         //Consider model it as location + timestamp
-        private readonly List<Location> _locations;
-        public IReadOnlyCollection<Location> Locations => _locations;
+        private readonly List<Position> _positions;
+        public IReadOnlyCollection<Position> Positions => _positions;
 
         public decimal Distance { get; set; }
 
-        public void AddLocation(Location location)
+        public void AddPosition(Position position)
         {
-            if (_locations.Any())
+            if (_positions.Any())
             {
-                Distance += CalculateDistanceService.DistanceInBetween(_locations.Last(), location);
+                var last = _positions.Last(); //Consider persist last position
+
+                if (position.Time <= last.Time)
+                {
+                    throw new ArgumentException("New position must later than last position");
+                }
+
+                Distance += CalculateDistanceService.DistanceInBetween(last.Latitude, last.Longitude, position.Latitude, position.Longitude);
             }
 
-            _locations.Add(location);
+            _positions.Add(position);
         }
+    }
+
+    public class Position
+    {
+        public Position(DateTimeOffset time, decimal latitude, decimal longitude)
+        {
+            Time = time.ToUniversalTime();
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
+        public DateTimeOffset Time { get; set; } //Utc, so it is GEO-aware
+        public decimal Latitude { get; private set; }
+        public decimal Longitude { get; private set; }
     }
 }

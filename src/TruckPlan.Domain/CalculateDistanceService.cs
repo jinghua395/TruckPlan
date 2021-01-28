@@ -4,12 +4,17 @@ namespace TruckPlan.Domain
 {
     public class CalculateDistanceService
     {
-        public static decimal DistanceInBetween(Location l1, Location l2)
+        public static decimal DistanceInBetween(Location from, Location to)
+        {
+            return DistanceInBetween(from.Latitude, from.Longitude, to.Latitude, to.Longitude);
+        }
+
+        public static decimal DistanceInBetween(decimal fromLatitude, decimal fromLongitude, decimal toLatitude, decimal toLongitude)
         {
             return (decimal)Math.Sqrt(
-                Math.Pow((double)l2.Latitude - (double)l1.Latitude, 2)
+                Math.Pow((double)toLatitude - (double)fromLatitude, 2)
                 +
-                Math.Pow((double)l2.Longitude - (double)l1.Longitude, 2)
+                Math.Pow((double)toLongitude - (double)fromLongitude, 2)
             );
         }
     }

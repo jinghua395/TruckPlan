@@ -31,8 +31,10 @@ namespace TruckPlan.Application.Infrastructure
 
         public Task<DriverTrackDTO> Handle(int ageFrom, DateTime dateFrom, DateTime dateTo)
         {
+            //Consider use TimeService so it is GEO-aware
             var birthdayFrom = DateTime.Today.AddYears(ageFrom * -1);
 
+            //If this is a performance issue, persist the driver age in the trace Aggregate root
             var drivers = _context.Drivers
                 .Where(d => d.Birthday <= birthdayFrom)
                 .Select(d => d.Id)
