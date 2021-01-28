@@ -7,9 +7,9 @@ namespace TruckPlan.Domain.Test
     public class TrackTest
     {
         [TestMethod]
-        public void AddLocation_WhenAddNew_CorrectDistance()
+        public void AddLocation_WhenAddNew_ThenCorrectDistance()
         {
-            var sut = new Track(Guid.NewGuid(), Guid.NewGuid());
+            var sut = new Track(Guid.NewGuid(), Guid.NewGuid(), DateTime.Today);
             sut.AddLocation(new Location(0m, 0m));
             sut.AddLocation(new Location(3m, 4m));
 

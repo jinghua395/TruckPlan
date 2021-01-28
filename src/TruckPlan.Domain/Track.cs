@@ -7,7 +7,7 @@ namespace TruckPlan.Domain
     //Aggregate root
     public class Track
     {
-        public Track(Guid truckPlanId, Guid driverId)
+        public Track(Guid truckPlanId, Guid driverId, DateTime date)
         {
             Id = Guid.NewGuid();
             TruckPlanId = truckPlanId;
@@ -20,6 +20,9 @@ namespace TruckPlan.Domain
         public Guid TruckPlanId { get; set; }
         public Guid DriverId { get; private set; }
 
+        public DateTime Date { get; private set; }
+
+        //can be a location + timestamp
         private readonly List<Location> _locations;
         public IReadOnlyCollection<Location> Locations => _locations;
 
